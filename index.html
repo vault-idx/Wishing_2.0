@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    overflow-x: hidden;
+  }
+
+  /* Card open animation */
+  .card-container {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    margin: 100px auto;
+    perspective: 1000px;
+  }
+
+  .card {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    cursor: pointer;
+  }
+
+  .card.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .front, .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+  }
+
+  .front {
+    background: #ff5f6d;
+  }
+
+  .back {
+    background: #ffc371;
+    transform: rotateY(180deg);
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Quote animation */
+  .quote {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5em;
+    animation: floatText 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes floatText {
+    0% { transform: translateY(0px);}
+    100% { transform: translateY(-15px);}
+  }
+
+  /* Celebration buttons */
+  .celebration-btns {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .celebration-btns button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #ff6a00;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+  }
+
+  .celebration-btns button:hover {
+    transform: scale(1.2);
+    background: #ff9a00;
+  }
+
+  /* Cake and candle animations */
+  .cake {
+    position: relative;
+    width: 100px;
+    height: 80px;
+    background: #ff6b81;
+    margin: 20px auto;
+    border-radius: 0 0 20px 20px;
+    display: none;
+  }
+
+  .candle {
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    background: #fff;
+    top: -30px;
+    left: 45px;
+    display: none;
+  }
+
+  .flame {
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    background: yellow;
+    border-radius: 50%;
+    top: -12px;
+    left: 2px;
+    animation: flicker 0.2s infinite;
+  }
+
+  @keyframes flicker {
+    0% { transform: scale(1);}
+    50% { transform: scale(1.3);}
+    100% { transform: scale(1);}
+  }
+
+  /* Wishing animation */
+  .wish {
+    font-size: 2em;
+    font-family: 'Pacifico', cursive;
+    margin-top: 20px;
+    opacity: 0;
+    animation: appear 2s forwards;
+  }
+
+  @keyframes appear {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+</style>
+</head>
+<body>
+
+<audio id="bg-music" src="birthday-song.mp3" autoplay loop></audio>
+
+<div class="card-container">
+  <div class="card" id="birthdayCard">
+    <div class="front">
+      <h1>🎉 Happy Birthday! 🎉</h1>
+      <p>Click to open your surprise!</p>
+    </div>
+    <div class="back">
+      <p class="quote">"May your day be as special as you are!"</p>
+      <div class="celebration-btns">
+        <button onclick="showCandle()">Light Candle</button>
+        <button onclick="showCake()">Cut Cake</button>
+      </div>
+      <div class="cake" id="cake"></div>
+      <div class="candle" id="candle">
+        <div class="flame"></div>
+      </div>
+      <div class="wish" id="wish">🎂 Happy Birthday! 🎂</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const card = document.getElementById('birthdayCard');
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+
+  function showCandle() {
+    document.getElementById('candle').style.display = 'block';
+  }
+
+  function showCake() {
+    document.getElementById('cake').style.display = 'block';
+    document.getElementById('wish').style.opacity = 1;
+  }
+</script>
+
+</body>
+</html>
